@@ -4,14 +4,6 @@ description: >-
   runs. Not affiliated with or endorsed by Render.
 version: 0.1.0
 
-# Held back until render_api is on pub.dev. It cannot publish before then —
-# pub rejects path dependencies — and leaving this off produces a permanent
-# `invalid_dependency` analyzer warning rather than a useful signal.
-#
-# To publish: remove this line, and change the render_api dependency below
-# from a path to a version constraint.
-publish_to: none
-
 repository: https://github.com/timmaffett/render_workflows_sdk
 issue_tracker: https://github.com/timmaffett/render_workflows_sdk/issues
 topics:
@@ -26,10 +18,10 @@ environment:
 dependencies:
   http: ^1.2.0
   meta: ^1.15.0
-  # Path dependency while both packages are unpublished; becomes a version
-  # constraint when they go to pub.dev.
-  render_api:
-    path: ../render_api_sdk
+  # This package builds on render_api rather than duplicating its transport,
+  # errors and pagination — so the two move together, and a breaking change
+  # there is a breaking change here.
+  render_api: ^0.1.0
 
 dev_dependencies:
   lints: ^5.0.0
