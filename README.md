@@ -31,6 +31,32 @@ print(run.result);                             // 29
 render.close();
 ```
 
+## Writing the tasks in Dart too
+
+This package **triggers** tasks. It says nothing about what language they are
+written in — by default that is TypeScript or Python, the two languages
+Render's own SDK supports.
+
+The tasks themselves can also be Dart, with
+[**`render-dart`**](https://www.npmjs.com/package/render-dart) (npm). It
+compiles task bodies to JavaScript and registers them through Render's SDK, and
+compiles anything needing `dart:io`, `dart:ffi` or isolates to a native
+executable called from those tasks:
+
+```bash
+npx render-dart init my-workflow
+```
+
+So the whole round trip can be Dart: this package starts a run, `render-dart`
+runs the task body, and `render_api` manages the service. They are independent
+— use this one against Python tasks quite happily.
+
+| | |
+| --- | --- |
+| [`render-dart`](https://www.npmjs.com/package/render-dart) (npm) | **Writing** tasks in Dart |
+| `render_workflows` (this) | **Running** them |
+| [`render_api`](https://pub.dev/packages/render_api) | Managing the services |
+
 ## Why this is separate from `render_api`
 
 Render splits the same way: `@renderinc/sdk` runs tasks, `@api/render-api`
