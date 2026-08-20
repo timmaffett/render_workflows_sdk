@@ -1,5 +1,8 @@
 # render_workflows
 
+> **Unofficial.** An independent project, not affiliated with, endorsed by, or
+> supported by [Render](https://render.com).
+
 A Dart client for [Render Workflows](https://render.com/docs/workflows) —
 start, watch and cancel task runs.
 
