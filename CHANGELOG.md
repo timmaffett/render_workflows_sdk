@@ -1,3 +1,9 @@
+## 0.1.3
+
+- The `Render()` example said `// reads RENDER_API_KEY` without saying from
+  where. Now `// token from the RENDER_API_KEY env var`, in the README and in
+  the library doc comment pub.dev renders on the API page.
+
 ## 0.1.2
 
 - Clean up README
