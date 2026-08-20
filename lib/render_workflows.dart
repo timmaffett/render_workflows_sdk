@@ -6,7 +6,7 @@
 /// splits the same way.
 ///
 /// ```dart
-/// final render = Render();                       // reads RENDER_API_KEY
+/// final render = Render();      // token from the RENDER_API_KEY env var
 /// final run = await render.workflows.runTask(
 ///   'my-workflow/sumSquares',
 ///   [[2, 3, 4]],

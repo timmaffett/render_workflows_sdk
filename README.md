@@ -15,7 +15,7 @@ start, watch and cancel task runs.
 Mirrors Render's official TypeScript SDK, so its documentation carries over:
 
 ```dart
-final render = Render();                       // reads RENDER_API_KEY
+final render = Render();         // token from the RENDER_API_KEY env var
 
 final run = await render.workflows.runTask(
   'my-workflow/sumSquares',

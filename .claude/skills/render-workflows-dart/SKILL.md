@@ -27,7 +27,7 @@ skill. Creating and deploying workflow *services* is plain REST — use
 ```dart
 import 'package:render_workflows/render_workflows.dart';
 
-final render = Render();                     // reads RENDER_API_KEY
+final render = Render();         // token from the RENDER_API_KEY env var
 try {
   final run = await render.workflows.runTask(
     'my-workflow/sumSquares',

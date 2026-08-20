@@ -8,7 +8,7 @@ This file is for coding agents. `README.md` explains the package to a user.
 ## Using it
 
 ```dart
-final render = Render();                  // reads RENDER_API_KEY
+final render = Render();         // token from the RENDER_API_KEY env var
 final run = await render.workflows.runTask('my-workflow/sumSquares', [[2, 3, 4]]);
 print(run.result);                        // 29
 render.close();
