@@ -1,7 +1,22 @@
 name: render_workflows
 description: A Dart client for Render Workflows — start, watch and cancel task runs.
 version: 0.1.0
+
+# Held back until render_api is on pub.dev. It cannot publish before then —
+# pub rejects path dependencies — and leaving this off produces a permanent
+# `invalid_dependency` analyzer warning rather than a useful signal.
+#
+# To publish: remove this line, and change the render_api dependency below
+# from a path to a version constraint.
 publish_to: none
+
+repository: https://github.com/timmaffett/render_workflows_sdk
+issue_tracker: https://github.com/timmaffett/render_workflows_sdk/issues
+topics:
+  - render
+  - workflows
+  - tasks
+  - background-jobs
 
 environment:
   sdk: ^3.10.0
