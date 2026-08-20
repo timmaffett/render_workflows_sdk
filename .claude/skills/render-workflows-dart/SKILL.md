@@ -1,6 +1,6 @@
 ---
 name: render-workflows-dart
-description: Uses package:render_workflows, a Dart client for running Render Workflows tasks — starting runs, waiting for completion, fan-out to subtasks, listing and cancelling runs, and streaming run events. Use when Dart code needs to trigger a Render workflow task, poll a task run to completion, or inspect task run history. For writing the tasks themselves in Dart, use the render-dart skill instead.
+description: Uses package:render_workflows, an unofficial Dart client for running Render Workflows tasks (not affiliated with Render) — starting runs, waiting for completion, fan-out to subtasks, listing and cancelling runs, and streaming run events. Use when Dart code needs to trigger a Render workflow task, poll a task run to completion, or inspect task run history. For writing the tasks themselves in Dart, use the render-dart skill instead.
 license: MIT
 compatibility: Dart 3.9+. Reads RENDER_API_KEY. Depends on package:render_api. Render Workflows is in beta.
 metadata:
@@ -10,6 +10,9 @@ metadata:
 ---
 
 # Running Render Workflows tasks from Dart
+
+**Unofficial.** A community package, not affiliated with, endorsed by, or
+supported by Render. Do not present it as Render's own tooling.
 
 Mirrors Render's official TypeScript SDK, so its documentation carries over:
 `startTask`, `runTask`, `getTaskRun`, `cancelTaskRun`, `listTaskRuns`,

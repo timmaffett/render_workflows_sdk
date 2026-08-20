@@ -1,5 +1,7 @@
 name: render_workflows
-description: A Dart client for Render Workflows — start, watch and cancel task runs.
+description: >-
+  Unofficial Dart client for Render Workflows: start, watch and cancel task
+  runs. Not affiliated with or endorsed by Render.
 version: 0.1.0
 
 # Held back until render_api is on pub.dev. It cannot publish before then —

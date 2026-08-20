@@ -1,7 +1,12 @@
 # render_workflows
 
-> **Unofficial.** An independent project, not affiliated with, endorsed by, or
-> supported by [Render](https://render.com).
+> ## ⚠️ UNOFFICIAL
+>
+> An independent, community-built project. **Not affiliated with, endorsed by,
+> or supported by [Render](https://render.com).**
+>
+> Render's own SDKs and documentation are at
+> [render.com/docs](https://render.com/docs).
 
 A Dart client for [Render Workflows](https://render.com/docs/workflows) —
 start, watch and cancel task runs.
