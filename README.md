@@ -10,10 +10,7 @@
 
 [![Render](https://raw.githubusercontent.com/timmaffett/render_workflows_sdk/main/doc/render-logo.png)](https://render.com)
 
-<sub>The Render name and logo are trademarks of Render Services, Inc.
-The mark itself is unmodified, shown on white with the clear space
-Render's brand kit specifies, referentially — to identify the service
-these packages work with, not to suggest any endorsement.</sub>
+[\*note](#note)
 
 A Dart client for [Render Workflows](https://render.com/docs/workflows) —
 start, watch and cancel task runs.
@@ -105,3 +102,10 @@ there, or poll.
 dart test                      # offline, no credentials needed
 dart run example/smoke.dart    # live, needs RENDER_API_KEY
 ```
+
+## Note
+
+\* The Render name and logo are trademarks of Render Services, Inc. The mark
+itself is unmodified, shown on white with the clear space Render's brand kit
+specifies, referentially — to identify the service these packages work with,
+not to suggest any endorsement.
