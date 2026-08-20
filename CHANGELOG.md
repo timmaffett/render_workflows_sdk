@@ -1,3 +1,11 @@
+## 0.1.1
+
+- Adds `example/example.dart`, and formats the package with `dart format`.
+  Together these take the pub.dev score from 140/160 to 160/160 — the two
+  deductions were a missing example and formatting, both found with `pana`
+  before publishing rather than after.
+- README now names `render-dart` on npm, for writing task bodies in Dart.
+
 ## 0.1.0
 
 Initial release.

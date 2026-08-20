@@ -8,7 +8,12 @@
 > Render's own SDKs and documentation are at
 > [render.com/docs](https://render.com/docs).
 
-<a href="https://render.com"><img src="https://raw.githubusercontent.com/timmaffett/render_workflows_sdk/main/doc/render-logomark.svg" alt="Render" height="20" /></a>&nbsp;&nbsp;Built for **[Render](https://render.com)**.
+<a href="https://render.com">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/timmaffett/render_workflows_sdk/main/doc/render-logo-dark.png">
+    <img src="https://raw.githubusercontent.com/timmaffett/render_workflows_sdk/main/doc/render-logo.png" alt="Render" height="144">
+  </picture>
+</a>
 
 <sub>The Render name and logo are trademarks of Render Services, Inc. The mark
 is reproduced unaltered from Render's brand kit, referentially, to identify the

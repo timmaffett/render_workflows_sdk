@@ -9,28 +9,27 @@ Render renderWith(Future<http.Response> Function(http.Request) handler) =>
     Render(token: 'test-token', httpClient: MockClient(handler));
 
 http.Response json(Object? body, [int status = 200]) => http.Response(
-      jsonEncode(body),
-      status,
-      headers: {'content-type': 'application/json'},
-    );
+  jsonEncode(body),
+  status,
+  headers: {'content-type': 'application/json'},
+);
 
 Map<String, Object?> taskRun({
   String id = 'trn-1',
   String status = 'pending',
   String parent = '',
   List<Object?> results = const [],
-}) =>
-    {
-      'id': id,
-      'taskId': 'tsk-1',
-      'status': status,
-      'parentTaskRunId': parent,
-      'rootTaskRunId': '',
-      'retries': 0,
-      'attempts': <Object?>[],
-      'results': results,
-      'input': <Object?>[],
-    };
+}) => {
+  'id': id,
+  'taskId': 'tsk-1',
+  'status': status,
+  'parentTaskRunId': parent,
+  'rootTaskRunId': '',
+  'retries': 0,
+  'attempts': <Object?>[],
+  'results': results,
+  'input': <Object?>[],
+};
 
 void main() {
   group('startTask', () {
@@ -42,13 +41,13 @@ void main() {
       });
 
       final run = await render.workflows.startTask('wf/sumSquares', [
-        [2, 3, 4]
+        [2, 3, 4],
       ]);
 
       final body = jsonDecode(seen.body) as Map<String, Object?>;
       expect(body['task'], 'wf/sumSquares');
       expect(body['input'], [
-        [2, 3, 4]
+        [2, 3, 4],
       ]);
       expect(seen.url.path, endsWith('/task-runs'));
       expect(run.status, TaskRunStatus.pending);
@@ -64,8 +63,13 @@ void main() {
 
       expect(
         () => render.workflows.startTask('wf/t', ['x' * (5 * 1024 * 1024)]),
-        throwsA(isA<ArgumentError>()
-            .having((e) => e.message.toString(), 'message', contains('4 MB'))),
+        throwsA(
+          isA<ArgumentError>().having(
+            (e) => e.message.toString(),
+            'message',
+            contains('4 MB'),
+          ),
+        ),
       );
       expect(called, isFalse, reason: 'must not hit the network');
     });
@@ -158,8 +162,9 @@ void main() {
       var call = 0;
       final render = renderWith((_) async => json(pages[call++]));
 
-      final runs =
-          await render.workflows.listTaskRunsStream(pageSize: 2).toList();
+      final runs = await render.workflows
+          .listTaskRunsStream(pageSize: 2)
+          .toList();
 
       expect(runs.map((r) => r.id), ['trn-0', 'trn-1', 'trn-2']);
       expect(call, 2, reason: 'a short second page ends the listing');

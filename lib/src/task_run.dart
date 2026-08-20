@@ -18,16 +18,16 @@ class TaskRunAttempt {
   });
 
   factory TaskRunAttempt.fromJson(Map<String, Object?> json) => TaskRunAttempt(
-        attempt: (json['attempt'] as num?)?.toInt() ?? 0,
-        status: TaskRunStatus.fromWire(json['status'] as String?),
-        rawStatus: json['status'] as String? ?? '',
-        taskRunId: json['taskRunId'] as String?,
-        enqueuedAt: _date(json['enqueuedAt']),
-        startedAt: _date(json['startedAt']),
-        completedAt: _date(json['completedAt']),
-        error: json['error'] as String?,
-        results: json['results'] as List<Object?>?,
-      );
+    attempt: (json['attempt'] as num?)?.toInt() ?? 0,
+    status: TaskRunStatus.fromWire(json['status'] as String?),
+    rawStatus: json['status'] as String? ?? '',
+    taskRunId: json['taskRunId'] as String?,
+    enqueuedAt: _date(json['enqueuedAt']),
+    startedAt: _date(json['startedAt']),
+    completedAt: _date(json['completedAt']),
+    error: json['error'] as String?,
+    results: json['results'] as List<Object?>?,
+  );
 
   /// Zero-indexed attempt number.
   final int attempt;
@@ -68,21 +68,21 @@ class TaskRun {
   });
 
   factory TaskRun.fromJson(Map<String, Object?> json) => TaskRun(
-        id: json['id'] as String? ?? '',
-        taskId: json['taskId'] as String? ?? '',
-        status: TaskRunStatus.fromWire(json['status'] as String?),
-        rawStatus: json['status'] as String? ?? '',
-        retries: (json['retries'] as num?)?.toInt() ?? 0,
-        attempts: (json['attempts'] as List<Object?>? ?? const [])
-            .whereType<Map<String, Object?>>()
-            .map(TaskRunAttempt.fromJson)
-            .toList(growable: false),
-        parentTaskRunId: _blankToNull(json['parentTaskRunId'] as String?),
-        parentTaskAttempt: (json['parentTaskAttempt'] as num?)?.toInt(),
-        rootTaskRunId: _blankToNull(json['rootTaskRunId'] as String?),
-        startedAt: _date(json['startedAt']),
-        completedAt: _date(json['completedAt']),
-      );
+    id: json['id'] as String? ?? '',
+    taskId: json['taskId'] as String? ?? '',
+    status: TaskRunStatus.fromWire(json['status'] as String?),
+    rawStatus: json['status'] as String? ?? '',
+    retries: (json['retries'] as num?)?.toInt() ?? 0,
+    attempts: (json['attempts'] as List<Object?>? ?? const [])
+        .whereType<Map<String, Object?>>()
+        .map(TaskRunAttempt.fromJson)
+        .toList(growable: false),
+    parentTaskRunId: _blankToNull(json['parentTaskRunId'] as String?),
+    parentTaskAttempt: (json['parentTaskAttempt'] as num?)?.toInt(),
+    rootTaskRunId: _blankToNull(json['rootTaskRunId'] as String?),
+    startedAt: _date(json['startedAt']),
+    completedAt: _date(json['completedAt']),
+  );
 
   final String id;
   final String taskId;
@@ -171,7 +171,8 @@ class TaskRunDetails extends TaskRun {
   Object? get result => results.isEmpty ? null : results.first;
 
   @override
-  String toString() => 'TaskRunDetails($id, ${status.name}'
+  String toString() =>
+      'TaskRunDetails($id, ${status.name}'
       '${error == null ? '' : ', error: $error'})';
 }
 

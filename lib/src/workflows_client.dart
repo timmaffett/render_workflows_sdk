@@ -108,20 +108,19 @@ class WorkflowsClient {
     List<String>? ownerIds,
     List<String>? workflowIds,
     List<String>? workflowVersionIds,
-  }) =>
-      paginate(
-        (cursor, limit) => listTaskRuns(
-          cursor: cursor,
-          limit: limit,
-          taskSlugs: taskSlugs,
-          rootTaskRunIds: rootTaskRunIds,
-          ownerIds: ownerIds,
-          workflowIds: workflowIds,
-          workflowVersionIds: workflowVersionIds,
-        ),
-        limit: pageSize,
-        max: max,
-      );
+  }) => paginate(
+    (cursor, limit) => listTaskRuns(
+      cursor: cursor,
+      limit: limit,
+      taskSlugs: taskSlugs,
+      rootTaskRunIds: rootTaskRunIds,
+      ownerIds: ownerIds,
+      workflowIds: workflowIds,
+      workflowVersionIds: workflowVersionIds,
+    ),
+    limit: pageSize,
+    max: max,
+  );
 
   /// Polls [taskRunId] until it reaches a terminal state.
   ///
@@ -170,8 +169,9 @@ class WorkflowsClient {
 
     try {
       final response = await client.send(request);
-      final lines =
-          response.stream.transform(utf8.decoder).transform(const LineSplitter());
+      final lines = response.stream
+          .transform(utf8.decoder)
+          .transform(const LineSplitter());
 
       final data = StringBuffer();
       await for (final line in lines) {
@@ -211,6 +211,7 @@ class WorkflowsClient {
 /// Convenience predicates over a batch of runs.
 extension TaskRunListX on Iterable<TaskRun> {
   bool get allTerminal => every((r) => r.isTerminal);
-  Iterable<TaskRun> get failed => where((r) => r.status == TaskRunStatus.failed);
+  Iterable<TaskRun> get failed =>
+      where((r) => r.status == TaskRunStatus.failed);
   Iterable<TaskRun> get children => where((r) => r.isChildRun);
 }

@@ -26,17 +26,15 @@ enum TaskRunStatus {
 
   /// Whether the run has finished and will not change again.
   bool get isTerminal => switch (this) {
-        completed || succeeded || failed || canceled => true,
-        pending || running || paused || unknown => false,
-      };
+    completed || succeeded || failed || canceled => true,
+    pending || running || paused || unknown => false,
+  };
 
   /// Whether the run finished without error.
   bool get isSuccess => this == completed || this == succeeded;
 
-  static TaskRunStatus fromWire(String? value) => values.firstWhere(
-        (s) => s.wireValue == value,
-        orElse: () => unknown,
-      );
+  static TaskRunStatus fromWire(String? value) =>
+      values.firstWhere((s) => s.wireValue == value, orElse: () => unknown);
 }
 
 /// Instance size a task run executes on.
