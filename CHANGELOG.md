@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Clean up README
+
 ## 0.1.1
 
 - Adds `example/example.dart`, and formats the package with `dart format`.

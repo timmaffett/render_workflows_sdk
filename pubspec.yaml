@@ -1,8 +1,8 @@
 name: render_workflows
 description: >-
   Unofficial Dart client for Render Workflows: start, watch and cancel task
-  runs. Not affiliated with or endorsed by Render.
-version: 0.1.1
+  runs.
+version: 0.1.2
 
 repository: https://github.com/timmaffett/render_workflows_sdk
 issue_tracker: https://github.com/timmaffett/render_workflows_sdk/issues
