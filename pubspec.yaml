@@ -2,7 +2,7 @@ name: render_workflows
 description: >-
   Unofficial Dart client for Render Workflows: start, watch and cancel task
   runs.
-version: 0.1.3
+version: 0.1.4
 
 repository: https://github.com/timmaffett/render_workflows_sdk
 issue_tracker: https://github.com/timmaffett/render_workflows_sdk/issues
@@ -21,7 +21,7 @@ dependencies:
   # This package builds on render_api rather than duplicating its transport,
   # errors and pagination — so the two move together, and a breaking change
   # there is a breaking change here.
-  render_api: ^0.1.0
+  render_api: ^0.1.7
 
 dev_dependencies:
   lints: ^5.0.0

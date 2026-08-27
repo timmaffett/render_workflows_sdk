@@ -65,13 +65,21 @@ class WorkflowsClient {
 
   /// Retrieves a run, including its input, results and error.
   Future<TaskRunDetails> getTaskRun(String taskRunId) async {
-    final json = await _client.sendObject('GET', '/task-runs/$taskRunId');
+    final json = await _client.sendObject(
+      'GET',
+      '/task-runs/${Uri.encodeComponent(taskRunId)}',
+    );
     return TaskRunDetails.fromJson(json);
   }
 
   /// Cancels a run that has not finished. Throws if it is already terminal.
+  ///
+  /// The id is percent-encoded, like every path parameter here. Unencoded,
+  /// `'../workflows/wfl-x'` would make this a DELETE of a workflow: `Uri`
+  /// normalises the `..` away before the request is sent, and the caller has
+  /// no way to see that the request it asked for is not the request that left.
   Future<void> cancelTaskRun(String taskRunId) =>
-      _client.send('DELETE', '/task-runs/$taskRunId');
+      _client.send('DELETE', '/task-runs/${Uri.encodeComponent(taskRunId)}');
 
   /// Lists one page of runs matching the given filters.
   Future<Page<TaskRun>> listTaskRuns({
@@ -161,11 +169,16 @@ class WorkflowsClient {
     if (taskRunIds.isEmpty) return;
 
     final client = httpClient ?? http.Client();
-    final query = taskRunIds.map((id) => 'taskRunIds=$id').join('&');
-    final request = http.Request(
-      'GET',
-      Uri.parse('${_client.baseUrl}/task-runs/events?$query'),
-    )..headers.addAll(_client.authHeaders(accept: 'text/event-stream'));
+    // Built through Uri rather than by concatenation. Render repeats the key
+    // for multiple ids, which `replace` does for an Iterable value, and it
+    // encodes each one -- an id containing `&` would otherwise append query
+    // parameters of its caller's choosing, and a `#` would truncate the query
+    // entirely.
+    final uri = Uri.parse(
+      '${_client.baseUrl}/task-runs/events',
+    ).replace(queryParameters: {'taskRunIds': taskRunIds});
+    final request = http.Request('GET', uri)
+      ..headers.addAll(_client.authHeaders(accept: 'text/event-stream'));
 
     try {
       final response = await client.send(request);
@@ -186,6 +199,17 @@ class WorkflowsClient {
           }
         } else if (line.startsWith('data:')) {
           data.write(line.substring(5).trimLeft());
+          // An SSE frame ends at a blank line, so until one arrives this
+          // buffer holds whatever the peer chooses to send. Render will not
+          // do this, but a client library should not let a network peer
+          // decide how much memory it uses.
+          if (data.length > maxEventBytes) {
+            throw StateError(
+              'A task-run event exceeded '
+              '${maxEventBytes ~/ (1024 * 1024)} MB without ending. The '
+              'stream was abandoned rather than buffered further.',
+            );
+          }
         }
         // `id:`, `event:` and `retry:` carry nothing this client needs.
       }
@@ -193,6 +217,13 @@ class WorkflowsClient {
       if (httpClient == null) client.close();
     }
   }
+
+  /// The largest single event this client will buffer.
+  ///
+  /// Comfortably above anything Render sends -- a run's details carry its
+  /// input, itself capped at [maxInputBytes], plus a result -- and far below
+  /// the point where an unterminated frame would matter.
+  static const int maxEventBytes = 16 * 1024 * 1024;
 
   static void _assertInputWithinLimit(String taskSlug, List<Object?> input) {
     final encoded = utf8.encode(jsonEncode(input)).length;
